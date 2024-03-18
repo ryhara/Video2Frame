@@ -1,3 +1,18 @@
+# custom
+.DS_Store
+
+# movie
+*.mp3
+*.mp4
+*.mov
+*.avi
+
+# image
+*.jpg
+*.jpeg
+*.png
+*.gif
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
