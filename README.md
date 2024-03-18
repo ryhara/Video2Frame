@@ -37,7 +37,8 @@ Python3, numpy, opencv-python が入っていれば基本的に動くと思い�
 cd src
 ```
 
-input_pathは必ず指定してください。その他のパラメータはオプションです
+input_path は必ず指定してください。その他のパラメータはオプションです
+
 ```
 python main.py <input_path> [--mode=, --output_path=, --basename=, --extension= ]
 ```
@@ -48,7 +49,14 @@ python main.py <input_path> [--mode=, --output_path=, --basename=, --extension= 
 python main.py -h
 ```
 
+Makefile での実行方法も用意しています。Makefile 内に解説を書いているのでご活用ください
+
+```
+make 〇〇
+```
+
 ## License
+
 MIT LICENSE
 
 ## Reference
