@@ -1,5 +1,6 @@
 import cv2
 import os
+import datetime
 
 def video_to_image_all(input_path, output_path='../data/output', basename='frame', extension='jpg'):
     cap = cv2.VideoCapture(input_path)
@@ -7,6 +8,8 @@ def video_to_image_all(input_path, output_path='../data/output', basename='frame
     if not cap.isOpened():
         return
 
+    timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    output_path = os.path.join(output_path, timestamp)
     os.makedirs(output_path, exist_ok=True)
     base_path = os.path.join(output_path, basename)
 
@@ -38,7 +41,7 @@ def video_info(input_path):
     cap.release()
 
 # TODO : split完成させる
-def video_split(input_path, output_path='../data/output', basename='frame', extension='mp4', start_sec=0, end_sec=10):
+def video_cut(input_path, output_path='../data/output', basename='frame', extension='mp4', start_sec=0, end_sec=10):
     cap = cv2.VideoCapture(input_path)
 
     if not cap.isOpened():

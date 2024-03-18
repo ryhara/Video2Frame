@@ -1,5 +1,5 @@
 usage:
-	echo "make [clean_input, clean_output, clean_cache, clean, info, run, split]"
+	echo "make [clean_input, clean_output, clean_cache, clean, info, run, cut]"
 
 # remove all files in input folder
 clean_input:
@@ -20,12 +20,12 @@ clean: clean_output clean_cache
 
 # run the video to frame
 run :
-	python ./src/main.py ./data/input/test.mp4
+	python ./src/main.py ./data/input/test.mp4 --output_path=./data/output/
 
-# split the video
-split:
-	python ./src/main.py ./data/input/test.mp4 --mode=split
+# cut the video
+cut:
+	python ./src/main.py ./data/input/test.mp4 --mode=cut --output_path=./data/output/
 
 # print the video info
 info:
-	python ./src/main.py ./data/input/test.mp4 --mode=info
+	python ./src/main.py ./data/input/test.mp4 --mode=info --output_path=./data/output/

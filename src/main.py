@@ -1,5 +1,5 @@
 import argparse
-from function import video_to_image_all, other_mode, video_info, video_split
+from function import video_to_image_all, other_mode, video_info, video_cut
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Save all frames of a video to images.')
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         video_to_image_all(args.input_path, args.output_path, args.basename, args.extension)
     elif args.mode == 'info':
         video_info(args.input_path)
-    elif args.mode == 'split':
-        video_split(args.input_path, args.output_path, args.basename, args.extension)
+    elif args.mode == 'cut':
+        video_cut(args.input_path, args.output_path, args.basename, args.extension)
     else:
         other_mode()
