@@ -1,5 +1,5 @@
 usage:
-	echo "make [clean_input, clean_output, clean_cache, clean, run]"
+	echo "make [clean_input, clean_output, clean_cache, clean, info, run, split]"
 
 
 clean_input:
@@ -14,4 +14,10 @@ clean_cache:
 clean: clean_output clean_cache
 
 run :
-	python ./src/main.py input_path=. --mode=a
+	python ./src/main.py ./data/input/test.mp4
+
+split:
+	python ./src/main.py ./data/input/test.mp4 --mode=split
+
+info:
+	python ./src/main.py ./data/input/test.mp4 --mode=info
