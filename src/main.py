@@ -1,5 +1,5 @@
 import argparse
-from function import video_to_image_all, other_mode, video_info, video_cut
+from function import video_to_image_all, print_info, video_info, video_cut
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Save all frames of a video to images.')
@@ -8,6 +8,9 @@ if __name__ == '__main__':
     parser.add_argument('--output_path', type=str, default='../data/output', help='Directory to save the images. Default is "../data/output".')
     parser.add_argument('--basename', type=str, default='frame', help='Basename for the saved images. Default is "frame".')
     parser.add_argument('--extension', type=str, default='jpg', help='Extension for the saved images. Default is "jpg".')
+    parser.add_argument('--start', type=int, default=0, help='Start time to cut the video. Default is 0.')
+    parser.add_argument('--end', type=int, default=10, help='End time to cut the video. Default is 10.')
+    parser.add_argument('--split_num', type=int, default=2, help='Number of split videos. Default is 2.')
 
     args = parser.parse_args()
 
@@ -16,6 +19,9 @@ if __name__ == '__main__':
     elif args.mode == 'info':
         video_info(args.input_path)
     elif args.mode == 'cut':
-        video_cut(args.input_path, args.output_path, args.basename, args.extension)
+        video_cut(args.input_path, args.output_path, args.basename, args.extension, args.start, args.end)
+    elif args.mode == 'split':
+        # video_split(args.input_path, args.output_path, args.basename, args.extension, args.split_num)
+        print('Not implemented yet.')
     else:
-        other_mode()
+        print_info(args.mode)

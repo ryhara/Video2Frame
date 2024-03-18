@@ -40,8 +40,8 @@ def video_info(input_path):
 
     cap.release()
 
-# TODO : split完成させる
-def video_cut(input_path, output_path='../data/output', basename='frame', extension='mp4', start_sec=0, end_sec=10):
+# TODO : cut
+def video_cut(input_path, output_path='../data/output', basename='frame', extension='mp4', start=0, end=10):
     cap = cv2.VideoCapture(input_path)
 
     if not cap.isOpened():
@@ -70,5 +70,10 @@ def video_cut(input_path, output_path='../data/output', basename='frame', extens
     cap.release()
     out.release()
 
-def other_mode():
-    print("This is a test")
+def print_info(mode):
+    print('Mode "{}" is not implemented yet.'.format(mode))
+    print('Please choose one of the following modes:')
+    print('  all:    Save all frames of a video to images.')
+    print('  info:   Print information of a video.')
+    print('  cut:    Cut a video.')
+    print('  split:  Split a video into multiple videos.')
