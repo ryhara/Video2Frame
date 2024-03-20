@@ -88,7 +88,7 @@ python main.py -h
 ```
 usage: main.py [-h] [-o OUTPUT_PATH] [-m MODE] [-b BASENAME]
                [-ie IMG_EXTENSION] [-v VIDEO_EXTENSION] [-s START_S]
-               [-e END_S] [-n SPLIT_NUM] [-d SWAP_DIMENSIONS]
+               [-e END_S] [-n SPLIT_NUM] [-sw SWAP_ASPECT] [-f FPS]
                input_path
 
 Save all frames of a video to images.
@@ -101,7 +101,7 @@ optional arguments:
   -o OUTPUT_PATH, --output_path OUTPUT_PATH
                         Directory to save the images. Default is
                         "../data/output".
-  -m MODE, --mode MODE  Mode to run the program. Default is "all".
+  -m MODE, --mode MODE  Mode to run the program. Default is "video2frame".
   -b BASENAME, --basename BASENAME
                         Basename for the saved images. Default is "frame".
   -ie IMG_EXTENSION, --img_extension IMG_EXTENSION
@@ -114,9 +114,9 @@ optional arguments:
                         End time to cut the video. Default is 10.
   -n SPLIT_NUM, --split_num SPLIT_NUM
                         Number of split videos. Default is 2.
-  -d SWAP_DIMENSIONS, --swap_dimensions SWAP_DIMENSIONS
-                        Swap dimensions of the video.
-
+  -sw SWAP_ASPECT, --swap_aspect SWAP_ASPECT
+                        Swap the aspect ratio of the video.
+  -f FPS, --fps FPS     Frame rate of the video. Default is 30.
 ```
 
 Makefile での実行方法も用意しています。Makefile 内に解説を書いているのでご活用ください

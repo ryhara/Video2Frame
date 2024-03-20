@@ -56,7 +56,7 @@ def video_info(input_path):
 
     cap.release()
 
-def video_cut(input_path, output_path='../data/output', basename='video', extension='mp4', start=0, end=10, swap_dimensions=False):
+def video_cut(input_path, output_path='../data/output', basename='video', extension='mp4', start=0, end=10, swap_aspect=False):
     """Cut a video.
 
     Args:
@@ -66,7 +66,7 @@ def video_cut(input_path, output_path='../data/output', basename='video', extens
         extension (str, optional): extension for the saved video. Defaults to 'mp4'.
         start (int, optional): start time to cut the video. Defaults to 0.
         end (int, optional): end time to cut the video. Defaults to 10.
-        swap_dimensions (bool, optional): swap dimensions of the video. Defaults to False.
+        swap_aspect (bool, optional): swap aspect ratio of the video. Defaults to False.
     """
     output_filename = f"{basename}_{start}s_{end}s.{extension}"
     output_file_path = os.path.join(output_path, output_filename)
@@ -77,7 +77,7 @@ def video_cut(input_path, output_path='../data/output', basename='video', extens
 
     width, height = clip.size
 
-    if swap_dimensions:
+    if swap_aspect:
         cut_clip = clip.subclip(start, end).resize((height, width))
     else:
         cut_clip = clip.subclip(start, end)
@@ -87,7 +87,7 @@ def video_cut(input_path, output_path='../data/output', basename='video', extens
     clip.close()
     cut_clip.close()
 
-def video_split(input_path, output_path='../data/output', basename='video', extension='mp4', split_num=2, swap_dimensions=False):
+def video_split(input_path, output_path='../data/output', basename='video', extension='mp4', split_num=2, swap_aspect=False):
     """Split a video into multiple videos.
 
     Args:
@@ -96,7 +96,7 @@ def video_split(input_path, output_path='../data/output', basename='video', exte
         basename (str, optional): basename for the saved video. Defaults to 'video_'.
         extension (str, optional): extension for the saved video. Defaults to 'mp4'.
         split_num (int, optional): number of split videos. Defaults to 2.
-        swap_dimensions (bool, optional): swap dimensions of the video. Defaults to False.
+        swap_aspect (bool, optional): swap aspect ratio of the video. Defaults to False.
     """
     os.makedirs(output_path, exist_ok=True)
 
@@ -115,7 +115,7 @@ def video_split(input_path, output_path='../data/output', basename='video', exte
         output_filename = f"{basename}_{i+1}.{extension}"
         output_file_path = os.path.join(output_path, output_filename)
 
-        if swap_dimensions:
+        if swap_aspect:
             cut_clip = clip.subclip(start_time, end_time).resize((height, width))
         else:
             cut_clip = clip.subclip(start_time, end_time)
