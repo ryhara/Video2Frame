@@ -1,7 +1,7 @@
 import cv2
 import os
 import datetime
-from moviepy.editor import VideoFileClip
+from moviepy.editor import VideoFileClip, ImageSequenceClip
 import os
 import time
 
@@ -126,7 +126,23 @@ def video_split(input_path, output_path='../data/output', basename='video', exte
         cut_clip.close()
         time.sleep(2)
 
+def frames_to_video(input_path, output_path='../data/output', basename='video', extension='mp4', fps=30):
+    """Convert frames to a video.
 
+    Args:
+        input_path (str): input_path of the frames.
+        output_path (str, optional): output_path of the video. Defaults to '../data/output'.
+        fps (int, optional): frame rate of the video. Defaults to 30.
+    """
+    os.makedirs(output_path, exist_ok=True)
+    output_path = os.path.join(output_path, '{}.{}'.format(basename, extension))
+    if os.path.isdir(input_path):
+        frames_dir = input_path
+        frame_paths = sorted([os.path.join(frames_dir, f) for f in os.listdir(frames_dir) if f.endswith(('.png', '.jpg'))])
+        clip = ImageSequenceClip(frame_paths, fps=fps)
+        clip.write_videofile(output_path, codec='libx264', audio_codec='aac')
+    else:
+        raise ValueError("input_path must be a directory. images in the directory will be used to create the video.")
 
 def print_info(mode):
     """Print information of a video.

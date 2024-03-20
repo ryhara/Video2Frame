@@ -19,8 +19,12 @@ clean: clean_output clean_cache
 # main.pyの引数を指定して実行してください
 
 # run the video to frame
-run :
+video2frame :
 	python ./src/main.py ./data/input/test.mp4 --output_path=./data/output/
+
+# run the frame to video
+frame2video:
+	python ./src/main.py ./data/input/frames --mode=frame2video --output_path=./data/output/
 
 # cut the video
 cut:
