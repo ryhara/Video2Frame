@@ -1,9 +1,8 @@
 import cv2
 import os
 import datetime
-from moviepy.editor import VideoFileClip, ImageSequenceClip
-import os
 import time
+from moviepy.editor import VideoFileClip, ImageSequenceClip
 
 def video_to_image_all(input_path, output_path='../data/output', basename='frame', extension='jpg'):
     """Save all frames of a video to images.
