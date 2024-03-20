@@ -24,7 +24,11 @@ run :
 
 # cut the video
 cut:
-	python ./src/main.py ./data/input/test.mp4 --mode=cut --output_path=./data/output/
+	python ./src/main.py ./data/input/test.mp4 --mode=cut --output_path=./data/output/ --start_s=0 --end_s=5 --basename=video
+
+# split the video
+split:
+	python ./src/main.py ./data/input/test.mp4 --mode=split --output_path=./data/output/ --split_num=10 --basename=video
 
 # print the video info
 info:

@@ -1,0 +1,54 @@
+name: video2Frame
+channels:
+  - defaults
+dependencies:
+  - bzip2=1.0.8=h80987f9_5
+  - ca-certificates=2024.3.11=hca03da5_0
+  - ffmpeg=4.2.2=h04105a8_0
+  - freetype=2.12.1=h1192e45_0
+  - gettext=0.21.0=h13f89a0_1
+  - gmp=6.2.1=hc377ac9_3
+  - gnutls=3.6.15=h887c41c_0
+  - icu=73.1=h313beb8_0
+  - lame=3.100=h1a28f6b_0
+  - libcxx=14.0.6=h848a8c0_0
+  - libffi=3.4.4=hca03da5_0
+  - libiconv=1.16=h1a28f6b_2
+  - libidn2=2.3.4=h80987f9_0
+  - libopus=1.3=h1a28f6b_1
+  - libpng=1.6.39=h80987f9_0
+  - libtasn1=4.19.0=h80987f9_0
+  - libunistring=0.9.10=h1a28f6b_0
+  - libvpx=1.10.0=hc377ac9_0
+  - libxml2=2.10.4=h0dcf63f_1
+  - llvm-openmp=14.0.6=hc6e5704_0
+  - ncurses=6.4=h313beb8_0
+  - nettle=3.7.3=h84b5d62_1
+  - openh264=1.8.0=h98b2900_0
+  - openssl=3.0.13=h1a28f6b_0
+  - pip=23.3.1=py38hca03da5_0
+  - python=3.8.18=hb885b13_0
+  - readline=8.2=h1a28f6b_0
+  - setuptools=68.2.2=py38hca03da5_0
+  - sqlite=3.41.2=h80987f9_0
+  - tk=8.6.12=hb8d0fd4_0
+  - wheel=0.41.2=py38hca03da5_0
+  - x264=1!152.20180806=h1a28f6b_0
+  - xz=5.4.6=h80987f9_0
+  - zlib=1.2.13=h5a0b063_0
+  - pip:
+      - certifi==2024.2.2
+      - charset-normalizer==3.3.2
+      - decorator==4.4.2
+      - idna==3.6
+      - imageio==2.34.0
+      - imageio-ffmpeg==0.4.9
+      - moviepy==1.0.3
+      - numpy==1.24.4
+      - opencv-python==4.9.0.80
+      - pillow==10.2.0
+      - proglog==0.1.10
+      - requests==2.31.0
+      - tqdm==4.66.2
+      - urllib3==2.2.1
+prefix: /Users/ryhara/anaconda3/envs/video2Frame

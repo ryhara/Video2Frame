@@ -7,11 +7,11 @@
 ### cut
 秒数を指定して、動画の特定の区間を切り出します。
 
-### info
-動画の情報を出力します。
-
 ### split
 動画を指定した数に分割します。
+
+### info
+動画の情報を出力します。
 
 
 ## Environment
@@ -21,23 +21,42 @@
 - M1 MacBook Air / macOS Sonoma 14.2.1
 - conda 23.7.2
 
+- 手動でconda環境を作成する方法
+
 ```
 conda create -n video2Frame python=3.8
+```
+
+```
+conda activate video2Frame
+```
+
+```
+conda install ffmpeg
 ```
 
 ```
 pip install -r requirements.txt
 ```
 
-Python3, numpy, opencv-python が入っていれば基本的に動くと思いますが、他の環境では動作確認を行っていないので保証できません。
+- conda env createでconda環境を作成する方法
+※こちらは動作確認は行っていません
+```
+conda env create -f environment.yml
+```
 
-動かない場合は仮想環境を作成して実行して見てください。
+Python3, numpy, opencv-python, moviepy, ffmpegが入っていれば基本的に動くと思いますが、他の環境では動作確認を行っていないので保証できません。
+
+動かない場合は仮想環境を作成して実行してみてください。
 
 ## Dataset
 
 ### input
 
 入力となる動画は`data/input/`以下に配置してください。
+
+実行時に入力動画のpathを引数に取るため、別の場所に配置することも可能です。
+
 
 ### output
 
@@ -54,7 +73,7 @@ cd src
 input_path は必ず指定してください。その他のパラメータはオプションです
 
 ```
-python main.py <input_path> [--mode=, --output_path=, --basename=, --extension= ]
+python main.py <input_path> [--output_path=, --mode=, --basename=, --img_extension=, --video_extension=, --start_s, --end_s, --split_num, --swap_dimensions]
 ```
 
 オプションの確認方法
@@ -63,7 +82,43 @@ python main.py <input_path> [--mode=, --output_path=, --basename=, --extension= 
 python main.py -h
 ```
 
+```
+usage: main.py [-h] [-o OUTPUT_PATH] [-m MODE] [-b BASENAME]
+               [-ie IMG_EXTENSION] [-v VIDEO_EXTENSION] [-s START_S]
+               [-e END_S] [-n SPLIT_NUM] [-d SWAP_DIMENSIONS]
+               input_path
+
+Save all frames of a video to images.
+
+positional arguments:
+  input_path            Path to the input video.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Directory to save the images. Default is
+                        "../data/output".
+  -m MODE, --mode MODE  Mode to run the program. Default is "all".
+  -b BASENAME, --basename BASENAME
+                        Basename for the saved images. Default is "frame".
+  -ie IMG_EXTENSION, --img_extension IMG_EXTENSION
+                        img_extension for the saved images. Default is "jpg".
+  -v VIDEO_EXTENSION, --video_extension VIDEO_EXTENSION
+                        video_extension for the saved video. Default is "mp4".
+  -s START_S, --start_s START_S
+                        Start time to cut the video. Default is 0.
+  -e END_S, --end_s END_S
+                        End time to cut the video. Default is 10.
+  -n SPLIT_NUM, --split_num SPLIT_NUM
+                        Number of split videos. Default is 2.
+  -d SWAP_DIMENSIONS, --swap_dimensions SWAP_DIMENSIONS
+                        Swap dimensions of the video.
+
+```
+
 Makefile での実行方法も用意しています。Makefile 内に解説を書いているのでご活用ください
+
+Makefileで実行する場合と、src/内で実行する場合の相対パスの指定の仕方に注意してください
 
 ```
 make 〇〇

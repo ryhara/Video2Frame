@@ -1,8 +1,19 @@
 import cv2
 import os
 import datetime
+from moviepy.editor import VideoFileClip
+import os
+import time
 
 def video_to_image_all(input_path, output_path='../data/output', basename='frame', extension='jpg'):
+    """Save all frames of a video to images.
+
+    Args:
+        input_path (str): input_path of the video.
+        output_path (str, optional): output_path of the images. Defaults to '../data/output'.
+        basename (str, optional): basename for the saved images. Defaults to 'frame'.
+        extension (str, optional): extension for the saved images. Defaults to 'jpg'.
+    """
     cap = cv2.VideoCapture(input_path)
 
     if not cap.isOpened():
@@ -26,6 +37,11 @@ def video_to_image_all(input_path, output_path='../data/output', basename='frame
             break
 
 def video_info(input_path):
+    """Print information of a video.
+
+    Args:
+        input_path (str): input_path of the video.
+    """
     cap = cv2.VideoCapture(input_path)
 
     if not cap.isOpened():
@@ -40,37 +56,84 @@ def video_info(input_path):
 
     cap.release()
 
-# TODO : cut
-def video_cut(input_path, output_path='../data/output', basename='frame', extension='mp4', start=0, end=10):
-    cap = cv2.VideoCapture(input_path)
+def video_cut(input_path, output_path='../data/output', basename='video', extension='mp4', start=0, end=10, swap_dimensions=False):
+    """Cut a video.
 
-    if not cap.isOpened():
-        return
+    Args:
+        input_path (str): input_path of the video.
+        output_path (str, optional): output_path of the video. Defaults to '../data/output'.
+        basename (str, optional): basename for the saved video. Defaults to 'video_'.
+        extension (str, optional): extension for the saved video. Defaults to 'mp4'.
+        start (int, optional): start time to cut the video. Defaults to 0.
+        end (int, optional): end time to cut the video. Defaults to 10.
+        swap_dimensions (bool, optional): swap dimensions of the video. Defaults to False.
+    """
+    output_filename = f"{basename}_{start}s_{end}s.{extension}"
+    output_file_path = os.path.join(output_path, output_filename)
 
     os.makedirs(output_path, exist_ok=True)
-    base_path = os.path.join(output_path, basename)
 
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter('{}_{}_to_{}.{}'.format(base_path, start_sec, end_sec, extension), fourcc, 20.0, (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))))
+    clip = VideoFileClip(input_path)
 
-    start_frame = int(start_sec * cap.get(cv2.CAP_PROP_FPS))
-    end_frame = int(end_sec * cap.get(cv2.CAP_PROP_FPS))
+    width, height = clip.size
 
-    cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
+    if swap_dimensions:
+        cut_clip = clip.subclip(start, end).resize((height, width))
+    else:
+        cut_clip = clip.subclip(start, end)
 
-    while cap.isOpened():
-        ret, frame = cap.read()
-        if ret:
-            out.write(frame)
-            if cap.get(cv2.CAP_PROP_POS_FRAMES) >= end_frame:
-                break
+    cut_clip.write_videofile(output_file_path, codec='libx264', audio_codec='aac')
+
+    clip.close()
+    cut_clip.close()
+
+def video_split(input_path, output_path='../data/output', basename='video', extension='mp4', split_num=2, swap_dimensions=False):
+    """Split a video into multiple videos.
+
+    Args:
+        input_path (str): input_path of the video.
+        output_path (str, optional): output_path of the video. Defaults to '../data/output'.
+        basename (str, optional): basename for the saved video. Defaults to 'video_'.
+        extension (str, optional): extension for the saved video. Defaults to 'mp4'.
+        split_num (int, optional): number of split videos. Defaults to 2.
+        swap_dimensions (bool, optional): swap dimensions of the video. Defaults to False.
+    """
+    os.makedirs(output_path, exist_ok=True)
+
+    clip = VideoFileClip(input_path)
+    total_duration = clip.duration
+    width, height = clip.size
+
+    clip_duration = total_duration / split_num
+    clip.close()
+
+    for i in range(split_num):
+        clip = VideoFileClip(input_path)
+        start_time = i * clip_duration
+        end_time = min((i + 1) * clip_duration, total_duration)
+
+        output_filename = f"{basename}_{i+1}.{extension}"
+        output_file_path = os.path.join(output_path, output_filename)
+
+        if swap_dimensions:
+            cut_clip = clip.subclip(start_time, end_time).resize((height, width))
         else:
-            break
+            cut_clip = clip.subclip(start_time, end_time)
 
-    cap.release()
-    out.release()
+        cut_clip.write_videofile(output_file_path, codec='libx264', audio_codec='aac')
+
+        clip.close()
+        cut_clip.close()
+        time.sleep(2)
+
+
 
 def print_info(mode):
+    """Print information of a video.
+
+    Args:
+        mode (str): mode to run the program.
+    """
     print('Mode "{}" is not implemented yet.'.format(mode))
     print('Please choose one of the following modes:')
     print('  all:    Save all frames of a video to images.')
