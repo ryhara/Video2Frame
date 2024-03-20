@@ -1,30 +1,30 @@
-# video2Frame
+# Video2Frame
 
 ## Function
 ### video2frame
-動画をフレームごとに切り出して、画像に変換します。全てのフレームを画像として保存します
+> 動画をフレームごとに切り出して、画像に変換します。全てのフレームを画像として保存します
 
 ### frame2video
-１つのディレクトリ内にある画像から、動画を作成します。画像は名前順で用いられます。
+> １つのディレクトリ内にある画像から、動画を作成します。画像は名前順で用いられます。
 
 ### cut
-秒数を指定して、動画の特定の区間を切り出します。
+> 秒数を指定して、動画の特定の区間を切り出します。
 
 ### split
-動画を指定した数に分割します。
+> 動画を指定した数に分割します。
 
 ### info
-動画の情報を出力します。
+> 動画の情報を出力します。
 
 
 ## Environment
 
 実行環境は以下の通りとなっています。
 
-- M1 MacBook Air / macOS Sonoma 14.2.1
-- conda 23.7.2
+> - M1 MacBook Air / macOS Sonoma 14.2.1
+> - conda 23.7.2
 
-- 手動でconda環境を作成する方法
+**手動でconda環境を作成する方法**
 
 ```
 conda create -n video2Frame python=3.8
@@ -42,7 +42,8 @@ conda install ffmpeg
 pip install -r requirements.txt
 ```
 
-- conda env createでconda環境を作成する方法
+**conda env createでconda環境を作成する方法**
+
 ※こちらは動作確認は行っていません
 ```
 conda env create -f environment.yml
@@ -56,16 +57,16 @@ Python3, numpy, opencv-python, moviepy, ffmpegが入っていれば基本的に�
 
 ### input
 
-入力となる動画は`data/input/`以下に配置してください。
-
-実行時に入力動画のpathを引数に取るため、別の場所に配置することも可能です。
+> 入力となる動画は`data/input/`以下に配置してください。
+>
+> 実行時に入力動画のpathを引数に取るため、別の場所に配置することも可能です。
 
 
 ### output
 
-出力結果は指定しない限り、`data/output/`以下に保存されます。
-
-引数で指定することも可能です。指定方法は Usage を確認してください。
+> 出力結果は指定しない限り、`data/output/`以下に保存されます。
+>
+> 引数で指定することも可能です。指定方法は Usage を確認してください。
 
 ## Usage
 
@@ -73,13 +74,12 @@ Python3, numpy, opencv-python, moviepy, ffmpegが入っていれば基本的に�
 cd src
 ```
 
-input_path は必ず指定してください。その他のパラメータはオプションです
-
 ```
 python main.py <input_path> [--output_path=, --mode=, --basename=, --img_extension=, --video_extension=, --start_s, --end_s, --split_num, --swap_dimensions]
 ```
+> input_path は必ず指定してください。その他のパラメータはオプションです
 
-オプションの確認方法
+**オプションの確認方法**
 
 ```
 python main.py -h
@@ -119,7 +119,8 @@ optional arguments:
   -f FPS, --fps FPS     Frame rate of the video. Default is 30.
 ```
 
-Makefile での実行方法も用意しています。Makefile 内に解説を書いているのでご活用ください
+### Makefile
+効率化のためMakefileでの実行方法も用意しています。Makefile 内に解説を書いているのでご活用ください
 
 Makefileで実行する場合と、src/内で実行する場合の相対パスの指定の仕方に注意してください
 
