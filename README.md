@@ -27,11 +27,11 @@
 **手動でconda環境を作成する方法**
 
 ```
-conda create -n video2Frame python=3.8
+conda create -n Video2Frame python=3.8
 ```
 
 ```
-conda activate video2Frame
+conda activate Video2Frame
 ```
 
 ```
@@ -75,7 +75,7 @@ cd src
 ```
 
 ```
-python main.py <input_path> [--output_path=, --mode=, --basename=, --img_extension=, --video_extension=, --start_s, --end_s, --split_num, --swap_dimensions]
+python main.py <input_path> [--output_path=, --mode=, --basename=, --img_extension=, --video_extension=, --start_s, --end_s, --split_num, --swap_aspect, --fps]
 ```
 > input_path は必ず指定してください。その他のパラメータはオプションです
 

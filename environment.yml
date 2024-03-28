@@ -1,4 +1,4 @@
-name: video2Frame
+name: Video2Frame
 channels:
   - defaults
 dependencies:
@@ -51,4 +51,3 @@ dependencies:
       - requests==2.31.0
       - tqdm==4.66.2
       - urllib3==2.2.1
-prefix: /Users/ryhara/anaconda3/envs/video2Frame
