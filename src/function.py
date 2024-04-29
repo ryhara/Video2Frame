@@ -23,17 +23,24 @@ def video_to_image_all(input_path, output_path='../data/output', basename='frame
     os.makedirs(output_path, exist_ok=True)
     base_path = os.path.join(output_path, basename)
 
-    digit = len(str(int(cap.get(cv2.CAP_PROP_FRAME_COUNT))))
+    info_file_path = os.path.join(output_path, "info.txt")
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    digit = len(str(frame_count))
 
-    n = 0
-
-    while True:
-        ret, frame = cap.read()
-        if ret:
-            cv2.imwrite('{}_{}.{}'.format(base_path, str(n).zfill(digit), extension), frame)
-            n += 1
-        else:
-            break
+    with open(info_file_path, 'w') as f:
+        n = 0
+        while True:
+            ret, frame = cap.read()
+            if ret:
+                file_name = '{}_{}.{}'.format(basename, str(n).zfill(digit), extension)
+                full_path = os.path.join(output_path, file_name)
+                cv2.imwrite(full_path, frame)
+                microseconds = int((n / fps) * 1e6)
+                f.write(f"{output_path}/{file_name} {microseconds}\n")
+                n += 1
+            else:
+                break
 
 def video_info(input_path):
     """Print information of a video.
